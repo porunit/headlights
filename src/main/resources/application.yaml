@@ -1,0 +1,23 @@
+
+spring:
+  data:
+    redis:
+      port: 6379
+      host: localhost
+      timeout: 10000
+  jpa:
+    hibernate:
+      ddlAuto: validate
+      formatSql: true
+    showSql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/headlight-website
+    username: porunit
+    password: 358000
+  flyway:
+    enabled: false
+  profiles:
+    active: default
+
+
+

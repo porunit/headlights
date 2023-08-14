@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15.3-alpine
+    init: true
+    volumes:
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+    environment:
+      POSTGRES_DB: headlight-website
+      POSTGRES_USER: porunit
+      POSTGRES_PASSWORD: 358000
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:6.0.10
+    ports:
+      - "6379:6379"
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis

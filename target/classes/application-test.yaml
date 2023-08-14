@@ -1,0 +1,17 @@
+spring:
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:headlightbackend
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddlAuto: create
+      formatSql: true
+    showSql: true
+    databasePlatform: org.hibernate.dialect.H2Dialect
