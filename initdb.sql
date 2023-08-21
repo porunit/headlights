@@ -69,6 +69,41 @@ create table headlights
             references model_generation,
     manufacturer          varchar
 );
+create table bucket_items
+(
+    headlight_id integer not null
+        constraint order_items_headlights_id_fk
+            references headlights,
+    count        integer not null,
+    id           integer not null
+        constraint order_items_pk
+            primary key
+);
+
+create table orders
+(
+    id             integer not null
+        constraint "Order_pk"
+            primary key,
+    date           varchar not null,
+    user_id        integer
+        constraint "Order_users_id_fk"
+            references users,
+    address        varchar not null,
+    payment_method varchar
+);
+
+create table orders_items
+(
+    order_id bigint not null
+        constraint fkij1wwgx6o198ubsx1oulpopem
+            references orders,
+    items_id bigint not null
+        constraint uk_7qrg5pfgjon82yhgwfqrdijm5
+            unique
+        constraint fkol66sj9j6lm31o8rea1gw8ij0
+            references bucket_items
+);
 
 CREATE SEQUENCE users_id_seq;
 ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('users_id_seq');

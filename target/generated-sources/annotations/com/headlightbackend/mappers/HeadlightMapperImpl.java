@@ -13,8 +13,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-08-14T16:20:42+0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 19 (Oracle Corporation)"
+    date = "2023-08-20T20:05:39+0300",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.5 (Amazon.com Inc.)"
 )
 public class HeadlightMapperImpl implements HeadlightMapper {
 

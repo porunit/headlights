@@ -1,5 +1,4 @@
 com/headlightbackend/data/dto/SearchFiltersDTO.class
-com/headlightbackend/component/HttpLoggingFilter.class
 com/headlightbackend/services/UserService.class
 com/headlightbackend/jwt/JwtAuthEntryPoint.class
 com/headlightbackend/data/dto/ErrorDTO.class

@@ -1,6 +1,6 @@
 package com.headlightbackend.config;
 
-import com.headlightbackend.component.HttpLoggingFilter;
+import com.headlightbackend.components.HttpLoggingFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

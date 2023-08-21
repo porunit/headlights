@@ -73,5 +73,4 @@ public interface HeadlightRepository extends JpaRepository<Headlight, Long>, Jpa
 
     Page<Headlight> findAllByCommonTypeName(String typeName, Pageable pageable);
 
-    Headlight findFirstByName(String name);
 }

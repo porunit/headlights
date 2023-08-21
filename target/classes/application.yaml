@@ -7,7 +7,7 @@ spring:
       timeout: 10000
   jpa:
     hibernate:
-      ddlAuto: validate
+      ddlAuto: update
       formatSql: true
     showSql: true
   datasource:
@@ -17,7 +17,7 @@ spring:
   flyway:
     enabled: false
   profiles:
-    active: default
+    active: dev
 
 
 

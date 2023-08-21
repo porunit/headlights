@@ -18,7 +18,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
-
     private final UserRepository userRepository;
 
     private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
