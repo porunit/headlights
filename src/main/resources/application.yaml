@@ -14,10 +14,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/headlight-website
     username: porunit
     password: 358000
-  flyway:
-    enabled: false
-  profiles:
-    active: dev
+  
 
 
 
