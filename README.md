@@ -1,6 +1,7 @@
 <div class="markdown prose w-full break-words dark:prose-invert light">
    <p><strong>Headlights Backend</strong></p>
    <hr>
+   <p>Приложение представляет из себя backend часть интернет магазина со всем присущим функционалом</p>
    <p><strong>Основные технологии и инструменты:</strong></p>
    <ul>
       <li><strong>Spring Boot</strong> - основа приложения.</li>
