@@ -10,5 +10,6 @@
       <li><strong>Redis</strong> - для кеширования данных.</li>
       <li><strong>Docker</strong> - для создания и управления контейнерами.</li>
       <li><strong>JWT</strong> - для реализации системы авторизации.</li>
+      <li><strong>Prometheus, grafana</strong> - для оотслеживания метрик</li>
    </ul>
    <hr>
