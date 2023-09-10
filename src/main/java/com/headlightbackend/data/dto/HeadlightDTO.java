@@ -11,7 +11,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Data
-
 public class HeadlightDTO implements Serializable {
     private Long id;
     private String articul;

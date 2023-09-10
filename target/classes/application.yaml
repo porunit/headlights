@@ -1,4 +1,17 @@
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 spring:
   data:
     redis:
@@ -16,8 +29,6 @@ spring:
     password: 358000
   flyway:
     enabled: false
-  profiles:
-    active: dev
 
 
 

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface CarGenerationRepository extends JpaRepository<CarModelGeneration, Long> {
     List<CarModelGeneration> findAllByBrandModelId(String brandModel_id);
+
+    CarModelGeneration findFirstById(Long carModelGenerationId);
 }

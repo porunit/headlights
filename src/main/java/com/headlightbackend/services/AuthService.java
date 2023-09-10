@@ -7,6 +7,7 @@ import com.headlightbackend.data.dto.UserDTO;
 import com.headlightbackend.jwt.JwtProvider;
 import com.headlightbackend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,8 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public String getUsernameFromToken(String token) {
-        return jwtProvider.getUsernameFromJwt(token);
+    public String getUsernameFromHeader(String authorizationHeader) {
+        String jwtToken = authorizationHeader.substring(7);
+        return jwtProvider.getUsernameFromJwt(jwtToken);
     }
 }

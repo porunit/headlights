@@ -24,11 +24,12 @@ import java.util.List;
 @RequestMapping("/catalog")
 public class HeadlightsController {
     private final HeadlightService headlightService;
+    private final String PAGE_SIZE = "25";
 
     @GetMapping
     public ResponseEntity<?> getAll(@RequestParam(defaultValue = "1") int page,
                                     @RequestParam(value = "filters", required = false) String filters,
-                                    @RequestParam(defaultValue = "10") int size) {
+                                    @RequestParam(defaultValue = PAGE_SIZE) int size) {
         List<HeadlightCatalogDTO> result;
         if (filters == null) {
             result = headlightService.getListOfHeadlightsCatalog(page, size);
@@ -39,11 +40,17 @@ public class HeadlightsController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("articul/{articul}")
+    public ResponseEntity<?> getOneByArticul(@PathVariable String articul){
+        return ResponseEntity.ok(
+                headlightService.getHeadlightByArticul(articul)
+        );
+    }
     @GetMapping("/category/{category}")
     public ResponseEntity<?> getAllByType(@PathVariable("category") String type,
                                           @RequestParam(value = "filters", required = false) String filters,
                                           @RequestParam(defaultValue = "1") int page,
-                                          @RequestParam(defaultValue = "10") int size) {
+                                          @RequestParam(defaultValue = PAGE_SIZE) int size) {
         List<HeadlightCatalogDTO> result;
         if (filters == null) {
             result = headlightService.getListOfHeadlightsByCommonType(type.toUpperCase(), page, size);
@@ -62,7 +69,7 @@ public class HeadlightsController {
     public ResponseEntity<?> getAllByBrand(@PathVariable("brand") String brandId,
                                            @RequestParam(value = "filters", required = false) String filters,
                                            @RequestParam(defaultValue = "1") int page,
-                                           @RequestParam(defaultValue = "10") int size) {
+                                           @RequestParam(defaultValue = PAGE_SIZE) int size) {
         List<HeadlightCatalogDTO> result;
         if (filters == null) {
             result = headlightService.getListOfHeadlightsByBrand(brandId, page, size);
@@ -80,7 +87,7 @@ public class HeadlightsController {
     public ResponseEntity<?> getAllByGeneration(@PathVariable("id") String generationId,
                                                 @RequestParam(value = "filters", required = false) String filters,
                                                 @RequestParam(defaultValue = "1") int page,
-                                                @RequestParam(defaultValue = "10") int size) {
+                                                @RequestParam(defaultValue = PAGE_SIZE) int size) {
         List<HeadlightCatalogDTO> result;
         if (filters == null) {
             result = headlightService.getListOfHeadlightsByGeneration(generationId, page, size);

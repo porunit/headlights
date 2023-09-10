@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ModelRepository extends JpaRepository<BrandModels, String> {
     List<BrandModels> findAllByBrandId(String brand_id);
+
+    BrandModels findFirstById(String id);
 }

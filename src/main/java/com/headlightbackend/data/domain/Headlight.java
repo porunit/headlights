@@ -16,24 +16,27 @@ import java.util.Objects;
 @Entity
 @Table(name = "headlights")
 public class Headlight implements Serializable {
-    private static final String SEQ_NAME = "headlights_id_seq";
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
-    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "price")
     private Integer price;
+
     @Column(name = "articul")
     private String articul;
-    @ManyToOne(cascade = {CascadeType.MERGE})
+
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "common_type_id")
     private CommonType commonType;
+
     @Column(name = "country")
     private String country;
+
     @Column(name = "fb_side_type")
     private String frontOrBackSideType;
     @Column(name = "manufacturer")

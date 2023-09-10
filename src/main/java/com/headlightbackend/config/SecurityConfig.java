@@ -1,5 +1,6 @@
 package com.headlightbackend.config;
 
+import com.headlightbackend.data.domain.Role;
 import com.headlightbackend.jwt.JwtAuthEntryPoint;
 import com.headlightbackend.jwt.JwtAuthFilter;
 import com.headlightbackend.services.UserService;
@@ -35,13 +36,12 @@ public class SecurityConfig {
                 .and()
                 .cors()
                 .and()
-                .authorizeHttpRequests().anyRequest().permitAll();
-        //  .requestMatchers("/auth/login", "/auth/register", "/websocket", "/swagger-ui").permitAll()
-        //  .anyRequest().authenticated();
-
+                .authorizeHttpRequests()
+                .requestMatchers("/orders","/orders/save").authenticated()
+                .requestMatchers("/admin/*").hasAuthority(Role.ADMIN.name())
+                .anyRequest().permitAll();
         http.
                 addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 

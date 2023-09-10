@@ -11,7 +11,6 @@ import lombok.*;
 @Table(name = "common_types")
 public class CommonType {
     private static final String SEQ_NAME = "common_types_id_seq";
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
@@ -19,6 +18,4 @@ public class CommonType {
     private Long id;
     @Column(name = "name")
     private String name;
-
-
 }

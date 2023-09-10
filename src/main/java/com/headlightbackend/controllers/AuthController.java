@@ -1,13 +1,15 @@
 package com.headlightbackend.controllers;
 
 
+import com.headlightbackend.data.domain.Role;
 import com.headlightbackend.data.dto.AuthResponseDTO;
 import com.headlightbackend.data.dto.UserDTO;
+import com.headlightbackend.exceptions.UsernameTakenException;
 import com.headlightbackend.jwt.JwtProvider;
 import com.headlightbackend.repositories.UserRepository;
 import com.headlightbackend.services.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,13 +35,15 @@ public class AuthController {
                 ));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+        return ResponseEntity.ok(new AuthResponseDTO(token,
+                userRepository.findFirstByUsername(userDTO.getUsername()).getRole()
+        ));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> register(@RequestBody @Valid UserDTO userDTO) {
         if (userRepository.existsByUsername(userDTO.getUsername())) {
-            return new ResponseEntity<>("Username taken", HttpStatus.BAD_REQUEST);
+            throw new UsernameTakenException("Username taken");
         }
         authService.register(userDTO);
         Authentication authentication = authManager
@@ -48,16 +52,19 @@ public class AuthController {
                 ));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+        return ResponseEntity.ok(new AuthResponseDTO(token, Role.USER));
     }
 
+    @GetMapping("/role")
+    public ResponseEntity<?> getRole(
+            @RequestHeader("Authorization") String authorizationHeader){
+        Role role = userRepository.findFirstByUsername(authService.getUsernameFromHeader(authorizationHeader)).getRole();
+        return ResponseEntity.ok(role);
+    }
     @GetMapping("/username")
     public ResponseEntity<?> getUsernameFromToken(
             @RequestHeader("Authorization") String authorizationHeader) {
-        String jwtToken = authorizationHeader.replace("Bearer ", "");
-        String username = authService.getUsernameFromToken(jwtToken);
-        return ResponseEntity.ok(username);
+        return ResponseEntity.ok(authService.getUsernameFromHeader(authorizationHeader));
     }
-
 
 }

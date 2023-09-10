@@ -16,7 +16,7 @@ import java.util.List;
 public interface HeadlightRepository extends JpaRepository<Headlight, Long>, JpaSpecificationExecutor<Headlight> {
     @NonNull
     List<Headlight> findAll();
-
+    Headlight findFirstByArticul(String articul);
     @Query("SELECT DISTINCT h.manufacturer FROM Headlight h WHERE h.carModelGeneration.brandModel.brand.id = :brand")
     List<String> findManufacturersWithCarBrandId(@Param("brand") String brandId);
 

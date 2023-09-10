@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommonTypeRepository extends JpaRepository<CommonType, Long> {
+    CommonType findFirstById(Long id);
 }
