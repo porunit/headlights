@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15.3-alpine
+    init: true
+    volumes:
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+    environment:
+      POSTGRES_DB: {DATABASE}
+      POSTGRES_USER: {DATABASE_USERNAME}
+      POSTGRES_PASSWORD: {DATABASE_PASS}
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:6.0.10
+    ports:
+      - "6379:6379"
+  prometheus:
+    image: prom/prometheus:v2.44.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./src/main/resources/prometheus.yaml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana:9.5.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./src/main/resources/grafana:/etc/grafana/provisioning/datasources
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis

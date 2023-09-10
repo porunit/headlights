@@ -1,1 +1,0 @@
-ALTER TABLE headlights ADD COLUMN image_url varchar;

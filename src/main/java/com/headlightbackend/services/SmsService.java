@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @Log4j2
 public class SmsService {
-    private final String API_KEY = "c22914bfac748297418eb99a4f2c0788";
-    private final String PROJECT = "developTestApiKey";
+    private final String API_KEY = {API_KEY};
+    private final String PROJECT = {PROJECT};
     private final String BASE_URL = "https://sms.notisend.ru/api/message/send";
     private final RestTemplate restTemplate;
     private final StringRedisTemplate redisTemplate;

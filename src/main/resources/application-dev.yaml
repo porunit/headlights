@@ -19,13 +19,13 @@ spring:
       timeout: 10000
   jpa:
     hibernate:
-      ddlAuto: update
+      ddlAuto: validate
       formatSql: true
     showSql: true
   datasource:
     url: jdbc:postgresql://db:5432/headlight-website
-    username: porunit
-    password: 358000
+    username: {DATABASE_USERNAME}
+    password: {DATABASE_PASS}
   flyway:
     enabled: false
 
